@@ -9,15 +9,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import UserInfo from './UserInfo.vue';
 
 export default {
   created() {
-    this.$store.dispatch('getUserInfo');
-    console.log(this.$store.state.users);
+    // this.$store.dispatch('getUserInfo');
+    this.getUserInfo();
   },
   methods: {
+    ...mapActions(['getUserInfo'])
 
   },
   components: {
