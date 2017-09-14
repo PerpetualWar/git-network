@@ -1,10 +1,10 @@
-import Home from './components/Home.vue';
-import UserInfo from './components/UserInfo.vue';
-import UserRepo from './components/UserRepo.vue';
+import HomePage from './components/HomePage.vue';
+import UserInfoPage from './components/UserInfoPage.vue';
+import UserRepoPage from './components/UserRepoPage.vue';
 
 export const routes = [
-  {path: '/', component: Home},
-  {path: '/:username', component: UserInfo},
-  {path: '/:username/:repo', component: UserRepo},
+  {path: '/', component: HomePage},
+  {path: '/:username', component: UserInfoPage},
+  {path: '/:username/:repo', component: UserRepoPage},
 
 ];

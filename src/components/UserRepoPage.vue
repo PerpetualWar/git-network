@@ -1,5 +1,7 @@
 <template>
-
+<div>
+  {{$route.params.repo}}
+</div>
 </template>
 
 <script>
