@@ -18,7 +18,8 @@ export default {
   props: ['username'],
   computed: {
     user() {
-      return this.$store.state.users[this.username];
+      // return this.$store.state.users[this.username];
+      return this.$store.getters.userById(this.username);
     }
   }
 }

@@ -1,17 +1,16 @@
 <template>
-<div>
+<div class="container">
   
-  <router-link :to="repo.full_name">{{repo.full_name}}</router-link>
-  <p>{{repo.description}}</p>
+  <router-link :to="repoLocal.full_name">{{repoLocal.full_name}}</router-link>
+  <p>{{repoLocal.description}}</p>
 </div>
 </template>
 
 <script>
 export default {
-  props: ['userRepos', 'repo'],
+  props: ['repo', 'commitRoute'],
   computed: {
-
+    
   }
-
 }
 </script>      
