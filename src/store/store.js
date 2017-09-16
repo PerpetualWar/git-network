@@ -22,19 +22,20 @@ export const store = new Vuex.Store({
     userById: state => username => state.users[username],
     getUserReposByUsername: state => username => Object.keys(state.repos).filter(repoUsername => state.repos[repoUsername].owner.login === username),
     getCommitById: state => commitId => state.commits[commitId],
-    getSortedCommits: state => repoId => Object.keys(state.commits[repoId])
+    getSortedCommits: state => repoId => Object.keys(state.commits[repoId] || {})
       .map(sha => state.commits[repoId][sha])
       .sort((a, b) => {
         const date1 = a.commit.author.date
         const date2 = b.commit.author.date
         return new Date(date1).getTime() - new Date(date2).getTime()
       })
+      .slice(0, 10)
   },
   actions: {
     fetchUser({ state, commit }, payload) {
       if (state.users.payload) return;
 
-      axios.get("https://api.github.com/users/" + payload)
+      return axios.get("https://api.github.com/users/" + payload)
         .then(response => {
           // console.log(response);
           commit("addUser", response.data);
@@ -47,7 +48,7 @@ export const store = new Vuex.Store({
     fetchUserRepos({ state, commit }, payload) {
       if (state.repos.payload) return;
 
-      axios.get("https://api.github.com/users/" + payload + "/repos")
+      return axios.get("https://api.github.com/users/" + payload + "/repos")
         .then(response => {
           // console.log(response.data);
           commit("addRepos", response.data);
@@ -62,7 +63,7 @@ export const store = new Vuex.Store({
       // axios.get("https://api.github.com/repos/" + payload[0] + "/" + payload[1] + "/commits")
       const { repo } = payload;
       // console.log("repo object", repo);
-      axios.get("https://api.github.com/repos/" + payload.username + "/" + payload.repo.name + "/commits")
+      return axios.get("https://api.github.com/repos/" + payload.username + "/" + payload.repo.name + "/commits")
         .then(response => {
           const commitArr = response.data;
           let payload2 = [];

@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div v-if="user">
     <app-user-info :username="username" /> {{repo}}
     <p>{{user.bio}}</p>
     <router-link :to="{ name: 'UserInfo', params: { userId: username }}" class="btn btn-primary">Back</router-link>
-
-    <!-- <p>{{userCommitsByRepo}}</p> -->
     <div v-if="isReady = false">
       <h2>Loading...</h2>
     </div>
@@ -16,7 +14,6 @@
         </li>
       </ul>
     </div>
-
   </div>
 </template>
 
@@ -26,8 +23,10 @@ import UserInfo from './UserInfo.vue';
 export default {
   created() {
     this.$store.dispatch('fetchUser', this.username);
-    this.$store.dispatch('fetchUserRepos', this.username);
-    this.$store.dispatch('fetchUserCommits', { username: this.username, repo: this.userCurrentRepo })
+    this.$store.dispatch('fetchUserRepos', this.username)
+      .then(() => {
+        this.$store.dispatch('fetchUserCommits', { username: this.username, repo: this.userCurrentRepo })
+      })
     // this.$store.dispatch('fetchUserCommits', this.commitRoute)
   },
   data() {
@@ -57,9 +56,10 @@ export default {
       return this.repoId.map(item => this.$store.getters.getRepoById(item))[0];
     },
     userCommitsByRepo() {
-      if (!this.$store.getters.getSortedCommits) return [];
-      return this.$store.getters.getSortedCommits(this.repoId);
+      // if (!this.$store.getters.getSortedCommits) return [];
       this.isReady = true;
+      return this.$store.getters.getSortedCommits(this.repoId);
+
     },
   },
   components: {
