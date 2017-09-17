@@ -1,10 +1,6 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-8 col-md-6">
-        <app-user-info v-for="userId in allUserIds" :key="userId" :username="userId" />
-      </div>
-    </div>
+  <div v-if="allUserIds">
+    <user-info v-for="userId in allUserIds" :key="userId" :username="userId" />
   </div>
 </template>
 
@@ -14,7 +10,6 @@ import UserInfo from './UserInfo.vue';
 
 export default {
   created() {
-    // this.$store.dispatch('getUserInfo');
     this.getUserInfo();
   },
   methods: {
@@ -22,7 +17,7 @@ export default {
 
   },
   components: {
-    appUserInfo: UserInfo
+    UserInfo
   },
   computed: {
     ...mapGetters(['allUserIds'])
@@ -30,9 +25,6 @@ export default {
 }
 </script>     
 
-<style>
-body {
-  background-color: lightgrey;
-  margin-top: 50px;
-}
+<style lang="scss">
+
 </style>

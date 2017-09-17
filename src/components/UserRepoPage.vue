@@ -1,19 +1,25 @@
 <template>
   <div v-if="user">
-    <app-user-info :username="username" /> {{repo}}
-    <p>{{user.bio}}</p>
-    <router-link :to="{ name: 'UserInfo', params: { userId: username }}" class="btn btn-primary">Back</router-link>
-    <div v-if="isReady = false">
-      <h2>Loading...</h2>
+    <user-info :username="username" />
+    <div v-if="userCurrentRepo">
+      <router-link :to="'/' + userCurrentRepo.full_name" class="bold">{{userCurrentRepo.full_name}}</router-link><br> {{userCurrentRepo.description}}
+    </div><br>
+    <div class="clearfix">
+      <div class="pull-left">
+        <h3>Commits: </h3><br>
+      </div>
+      <div class="pull-right">
+        <router-link :to="{ name: 'UserInfo', params: { userId: username }}" class="btn btn-primary">Back</router-link>
+        <router-link :to="{name: 'Home'}" class="btn btn-primary">Back to Users</router-link><br>
+      </div>
     </div>
-    <div v-else>
-      <ul style="list-style: none;">
-        <li v-for="item in userCommitsByRepo" class="panel">
-          <h4>{{item.commit.message}}</h4>
-          <br> {{item.commit.author.name}} commited {{item.commit.author.date}} <br><br>
+    <ul class="panel panel-default">
+      <transition-group name="slide" mode="in-out">
+        <li v-for="item in userCommitsByRepo" :key="item.sha" class="wrap">
+          <span class="bold">{{item.commit.message}}</span><br> {{item.commit.author.name}} commited {{item.commit.author.date}} <br><br>
         </li>
-      </ul>
-    </div>
+      </transition-group>
+    </ul>
   </div>
 </template>
 
@@ -21,18 +27,17 @@
 import UserInfo from './UserInfo.vue';
 
 export default {
+  data() {
+    return {
+      loading: false
+    }
+  },
   created() {
     this.$store.dispatch('fetchUser', this.username);
     this.$store.dispatch('fetchUserRepos', this.username)
       .then(() => {
         this.$store.dispatch('fetchUserCommits', { username: this.username, repo: this.userCurrentRepo })
-      })
-    // this.$store.dispatch('fetchUserCommits', this.commitRoute)
-  },
-  data() {
-    return {
-      isReady: false
-    };
+      });
   },
   computed: {
     repo() {
@@ -44,11 +49,6 @@ export default {
     user() {
       return this.$store.getters.userById(this.username)
     },
-    // commitRoute() {
-    //   let commitPayload = [];
-    //   commitPayload.push(this.username, this.repo);
-    //   return commitPayload;
-    // },
     repoId() {
       return this.$store.getters.getCurrentRepoId(this.repo);
     },
@@ -56,14 +56,15 @@ export default {
       return this.repoId.map(item => this.$store.getters.getRepoById(item))[0];
     },
     userCommitsByRepo() {
-      // if (!this.$store.getters.getSortedCommits) return [];
-      this.isReady = true;
       return this.$store.getters.getSortedCommits(this.repoId);
-
     },
   },
   components: {
-    appUserInfo: UserInfo
+    UserInfo
   }
 }
 </script>      
+
+<style scoped>
+
+</style>

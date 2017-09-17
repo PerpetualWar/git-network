@@ -1,17 +1,27 @@
 <template>
   <div v-if="user">
-    <h1>{{username}}'s Info Page</h1>
-    <app-user-info :username="username"></app-user-info>
+    <user-info :username="username"></user-info>
     <br>
-    <div>{{user.bio}}</div>
-    <div class="container">
-      <router-link to="/" class="btn btn-primary">Back</router-link>
+    <div class="">
+      <div class="clearfix">
+        <div class="pull-left">
+          <h3>Repositories: </h3><br>
+        </div>
+        <div class="pull-right">
+          <router-link to="/" class="btn btn-primary">Back</router-link>
+        </div>
+      </div>
+      <div v-if="userRepos">
+        <ul class="panel panel-default">
+          <transition-group name="slide" mode="out-in">
+            <li v-for="repo in userRepos" :key="repo.name" class="wrap">
+              <router-link :to="repo.full_name" class="bold">{{repo.full_name}}</router-link>
+              <span v-if="repo.description"><br>{{repo.description}}</span><br>
+            </li>
+          </transition-group>
+        </ul>
+      </div>
     </div>
-    <ul>
-      <li v-for="repo in userRepos" :key="repo.name">
-        <router-link :to="repo.full_name">{{repo.full_name}}</router-link><br> {{repo.description}}
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -32,14 +42,19 @@ export default {
     },
     userRepos() {
       return this.$store.getters
-        .getUserReposByUsername(this.username) // only usernames
-        .map(repoUsername => this.$store.getters.getRepoById(repoUsername)) // map to the actual repo object in state
-      // console.log(this.$store.state.repos);
+        .getUserReposByUsername(this.username)
+        .map(repoUsername => this.$store.getters.getRepoById(repoUsername))
     }
 
   },
   components: {
-    appUserInfo: UserInfo
+    UserInfo
   }
 }
 </script>      
+
+<style>
+.wrap {
+  margin: 10px 0px;
+}
+</style>
