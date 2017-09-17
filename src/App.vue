@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container-fluid">
-      <headers></headers>
+    <div class="">
+      <headers />
     </div>
     <div class="container">
       <div class="row">
@@ -12,20 +12,27 @@
         </div>
       </div>
     </div>
+    <div>
+      <footers />
+    </div>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   components: {
-    Headers: Header
+    Headers: Header,
+    Footers: Footer
   }
 }
 </script>
 
 <style lang="scss">
+@import '../node_modules/normalize.css/normalize.css';
+
 body {
   // background-color: lightgrey;
   margin-top: 50px;
