@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../node_modules/normalize.css/normalize.css';
+@import '~normalize.css/normalize.css';
 
 body {
   // background-color: lightgrey;
@@ -43,6 +43,27 @@ body {
 li {
   list-style: none;
 }
+
+a {
+  color:#55585A;
+  /* First we need to help some browsers along for this to work.
+     Just because a vendor prefix is there, doesn't mean it will
+     work in a browser made by that vendor either, it's just for
+     future-proofing purposes I guess. */
+  -o-transition:.2s;
+  -ms-transition:.2s;
+  -moz-transition:.2s;
+  -webkit-transition:.2s;
+  /* ...and now for the proper property */
+  transition:.2s;
+}
+a:hover { 
+  color:#B8BABA; 
+  }
+
+a,a:hover,a:visited,a:focus {
+    text-decoration: none;
+  }
 
 .bold {
   font-weight: 600;
