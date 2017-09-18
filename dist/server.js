@@ -4,8 +4,8 @@ var serveStatic = require('serve-static');
 var history = require('connect-history-api-fallback');
 
 app = express();
+// app.use(history());
 app.use(serveStatic(__dirname));
-app.use(history());
 
 var port = process.env.PORT || 5000;
 app.listen(port);
