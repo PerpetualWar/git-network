@@ -72,10 +72,10 @@ a,a:hover,a:visited,a:focus {
 }
 
 .slide-enter-active {
-  animation: slide-in 100ms ease-out forwards;
+  animation: slide-in 300ms ease-out forwards;
 }
 .slide-leave-active {
-  animation: slide-out 100ms ease-out forwards;
+  animation: slide-out 300ms ease-out forwards;
 }
 @keyframes slide-in {
   from {
