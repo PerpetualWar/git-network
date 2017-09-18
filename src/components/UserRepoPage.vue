@@ -27,11 +27,6 @@
 import UserInfo from './UserInfo.vue';
 
 export default {
-  data() {
-    return {
-      loading: false
-    }
-  },
   created() {
     this.$store.dispatch('fetchUser', this.username);
     this.$store.dispatch('fetchUserRepos', this.username)
