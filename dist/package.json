@@ -1,0 +1,10 @@
+{
+  "name": "git-network",
+  "description": "Vue Git Network Project",
+  "version": "1.0.0",
+  "author": "Srdjan Medjo",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install express"
+  }
+}
