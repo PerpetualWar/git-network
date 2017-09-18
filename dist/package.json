@@ -5,7 +5,7 @@
   "author": "Srdjan Medjo",
   "private": true,
   "scripts": {
-    "postinstall": "npm install express",
+    "postinstall": "npm install express connect-history-api-fallback",
     "start": "node server.js"
   }
 }
