@@ -9,8 +9,8 @@
         <h3>Commits: </h3><br>
       </div>
       <div class="pull-right">
-        <router-link :to="{ name: 'UserInfo', params: { userId: username }}" class="btn btn-primary">Back</router-link>
-        <router-link :to="{name: 'Home'}" class="btn btn-primary">Back to Users</router-link><br>
+        <router-link :to="{ name: 'UserInfo', params: { userId: username }}" class="btn btn-default">Back</router-link>
+        <router-link :to="{name: 'Home'}" class="btn btn-default">Back to Users</router-link><br>
       </div>
     </div>
     <ul class="panel panel-default">

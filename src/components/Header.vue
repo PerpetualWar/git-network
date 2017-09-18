@@ -22,7 +22,9 @@ export default {
 .top {
   padding: 100px 0px;
   margin: -50px 0px;
-  background-color: #337ab7;
+  // background-color: #337ab7;
+  background-color: #8A8A8A;
+  // background-color: #84868B;
   color: white;
   
 }

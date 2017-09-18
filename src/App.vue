@@ -45,7 +45,8 @@ li {
 }
 
 a {
-  color:#55585A;
+  color:#8F94BA;
+  // color:#55585A;
   /* First we need to help some browsers along for this to work.
      Just because a vendor prefix is there, doesn't mean it will
      work in a browser made by that vendor either, it's just for
@@ -58,7 +59,8 @@ a {
   transition:.2s;
 }
 a:hover { 
-  color:#B8BABA; 
+  color:#4D4F62; 
+  // color:#B8BABA; 
   }
 
 a,a:hover,a:visited,a:focus {

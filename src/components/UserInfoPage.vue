@@ -8,7 +8,7 @@
           <h3>Repositories: </h3><br>
         </div>
         <div class="pull-right">
-          <router-link to="/" class="btn btn-primary">Back</router-link>
+          <router-link to="/" class="btn btn-default">Back</router-link>
         </div>
       </div>
       <div v-if="userRepos">
