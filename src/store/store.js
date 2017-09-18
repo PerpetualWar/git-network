@@ -10,8 +10,7 @@ export const store = new Vuex.Store({
     users: {},
     allIds: [],
     repos: {},
-    commits: {},
-    loading: false
+    commits: {}
   },
   getters: {
     allUserIds: state => state.allIds,
@@ -23,8 +22,8 @@ export const store = new Vuex.Store({
     getSortedCommits: state => repoId => Object.keys(state.commits[repoId] || [])
       .map(sha => state.commits[repoId][sha])
       .sort((a, b) => {
-        const date1 = a.commit.author.date
-        const date2 = b.commit.author.date
+        const date1 = a.commit.author.date;
+        const date2 = b.commit.author.date;
         return new Date(date1).getTime() - new Date(date2).getTime()
       })
       .reverse()
@@ -54,8 +53,6 @@ export const store = new Vuex.Store({
         });
     },
     fetchUserCommits({ state, commit }, payload) {
-      // if (state.commits.payload.username) return;
-
       const { repo } = payload;
       return axios.get("https://api.github.com/repos/" + payload.username + "/" + payload.repo.name + "/commits")
         .then(response => {
@@ -88,6 +85,11 @@ export const store = new Vuex.Store({
       }
       commits.forEach(commit => {
         Vue.set(state.commits[repo.id], commit.sha, commit)
+        Object.keys(state.commits[repo.id])
+          .map(sha => {
+            const newDate = new Date(state.commits[repo.id][sha].commit.author.date).toLocaleString("bs-BA");
+            state.commits[repo.id][sha].commit.author.date = newDate;
+          })
       });
     }
   }
