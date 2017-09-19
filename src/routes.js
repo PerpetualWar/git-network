@@ -5,6 +5,5 @@ import UserRepoPage from './components/UserRepoPage.vue';
 export const routes = [
   {path: '/', name: 'Home', component: HomePage},
   {path: '/:username', name: 'UserInfo', component: UserInfoPage},
-  {path: '/:username/:repo', name: 'UserRepo', component: UserRepoPage},
-  {path: '*', redirect: '/'}
+  {path: '/:username/:repo', name: 'UserRepo', component: UserRepoPage}
 ];

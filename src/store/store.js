@@ -60,6 +60,8 @@ export const store = new Vuex.Store({
           let payload2 = [];
           payload2.push(repo, commitArr);
           commit("addCommits", payload2);
+        }).catch(error => {
+          console.log(error);
         });
     },
     getUserInfo({ dispatch, commit }) {
