@@ -33,6 +33,9 @@ git init
 # connect local git with heroku
 heroku git:remote --app <APP_NAME>
 
+# build the project
+npm run build
+
 # add and commit project
 git add . && git commit -m "Adding files"
 
