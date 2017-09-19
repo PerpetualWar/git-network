@@ -14,9 +14,10 @@
       </div>
     </div>
     <ul class="panel panel-default">
-      <transition-group name="slide" mode="in-out">
+      <transition-group name="slide" mode="out-in">
         <li v-for="item in userCommitsByRepo" :key="item.commit.author.date" class="wrap">
-          <span class="bold">{{item.commit.message}}</span><br> {{item.commit.author.name}} commited {{item.commit.author.date}} <br><br>
+          <span class="bold">{{item.commit.message}}</span>
+          <br> {{item.commit.author.name}} commited {{item.commit.author.date}} <br><br>
         </li>
       </transition-group>
     </ul>

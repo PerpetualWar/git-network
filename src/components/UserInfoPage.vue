@@ -54,7 +54,5 @@ export default {
 </script>      
 
 <style>
-.wrap {
-  margin: 10px 0px;
-}
+
 </style>

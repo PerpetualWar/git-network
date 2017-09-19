@@ -1,6 +1,10 @@
 <template>
-  <div v-if="allUserIds">
-    <user-info v-for="userId in allUserIds" :key="userId" :username="userId" />
+  <div>
+    <div v-if="allUserIds">
+      <transition-group name="slide" mode="out-in">
+        <user-info v-for="userId in allUserIds" :key="userId" :username="userId" />
+      </transition-group>
+    </div>
   </div>
 </template>
 
