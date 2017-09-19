@@ -29,11 +29,10 @@ import UserInfo from './UserInfo.vue';
 
 export default {
   created() {
-    this.$store.dispatch('fetchUser', this.username);
-    this.$store.dispatch('fetchUserRepos', this.username)
-      .then(() => {
-        this.$store.dispatch('fetchUserCommits', { username: this.username, repo: this.userCurrentRepo })
-      });
+    this.$store.dispatch('fetchUser', this.username)
+      .then(() => this.$store.dispatch('fetchUserRepos', this.username))
+      .then(() => this.$store.dispatch('fetchUserCommits', { username: this.username, repo: this.userCurrentRepo })
+      );
   },
   computed: {
     repo() {
