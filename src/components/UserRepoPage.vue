@@ -3,15 +3,13 @@
     <div v-if="user">
       <user-info :username="username" />
     </div>
-    <div v-if="!user && error">
+    <div v-else-if="!user && !userCurrentRepo && error">
       <p class="text-center panel">User does not exist</p>
     </div>
     <div v-if="userCurrentRepo">
       <router-link :to="'/' + userCurrentRepo.full_name" class="bold">{{userCurrentRepo.full_name}}</router-link><br> {{userCurrentRepo.description}}
     </div>
-    <div v-if="!user && !userCurrentRepo && error">
-    </div>
-    <div v-else-if="!userCurrentRepo && error">
+    <div v-else-if="user && !userCurrentRepo && error">
       <p class="text-center panel">Repo does not exist</p>
     </div><br>
     <div class="clearfix">
@@ -29,9 +27,7 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div v-else-if="!userCurrentRepo || !user && error">
-    </div>
-    <div v-else-if="error">
+    <div v-if="user && userCurrentRepo && error">
       <div class="text-center panel">{{error}}</div>
     </div>
     <div v-else>
