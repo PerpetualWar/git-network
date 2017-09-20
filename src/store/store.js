@@ -38,7 +38,8 @@ export const store = new Vuex.Store({
           commit("addUser", response.data);
         })
         .catch(error => {
-          console.log(error);
+          // console.log(error);
+          throw new Error('This user does not exist');
         });
     },
     fetchUserRepos({ state, commit }, payload) {
@@ -49,7 +50,8 @@ export const store = new Vuex.Store({
           commit("addRepos", response.data);
         })
         .catch(error => {
-          console.log(error);
+          // console.log(error);
+          throw new Error('This repository does not exist');
         });
     },
     fetchUserCommits({ state, commit }, payload) {
@@ -61,7 +63,8 @@ export const store = new Vuex.Store({
           payload2.push(repo, commitArr);
           commit("addCommits", payload2);
         }).catch(error => {
-          console.log(error);
+          // console.log(error);
+          throw new Error('No commits for this repo');
         });
     },
     getUserInfo({ dispatch, commit }) {
