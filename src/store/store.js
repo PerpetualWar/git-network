@@ -89,12 +89,7 @@ export const store = new Vuex.Store({
         Vue.set(state.commits, repo.id, {});
       }
       commits.forEach(commit => {
-        Vue.set(state.commits[repo.id], commit.sha, commit)
-        Object.keys(state.commits[repo.id])
-          .map(sha => {
-            const newDate = new Date(state.commits[repo.id][sha].commit.author.date).toLocaleString("bs-BA");
-            state.commits[repo.id][sha].commit.author.date = newDate;
-          })
+        Vue.set(state.commits[repo.id], commit.sha, commit)        
       });
     }
   }

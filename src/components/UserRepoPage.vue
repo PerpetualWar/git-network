@@ -35,7 +35,7 @@
         <transition-group name="slide" mode="out-in">
           <li v-for="item in userCommitsByRepo" :key="item.commit.author.date" class="wrap">
             <span class="bold">{{item.commit.message}}</span>
-            <br> {{item.commit.author.name}} commited {{item.commit.author.date}} <br><br>
+            <br> {{item.commit.author.name}} commited {{convertDate(item.commit.author.date)}} <br><br>
           </li>
         </transition-group>
       </ul>
@@ -45,6 +45,7 @@
 
 <script>
 import UserInfo from './UserInfo.vue';
+import moment from 'moment';
 
 export default {
   data() {
@@ -84,6 +85,11 @@ export default {
     userCommitsByRepo() {
       return this.$store.getters.getSortedCommits(this.repoId);
     },
+  },
+  methods: {
+    convertDate(date) {
+      return moment(date).locale('en').format('Do MMMM YYYY HH:mm:ss');
+    }
   },
   components: {
     UserInfo
